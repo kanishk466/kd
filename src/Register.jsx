@@ -6,7 +6,7 @@ const Register = () => {
     // Initialize form fields
     userName: '',
     email: '',
-    passwordHash: ''
+    password: ''
 
     // Add more fields as needed
   });
@@ -16,16 +16,24 @@ const Register = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
+    
   };
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('https://localhost:7092/api/User', formData)
+    axios.post('https://localhost:7055/api/User', formData)
   .then(response => {
     // Handle successful response
     console.log('Data created successfully:', response.data);
+
+
+    setFormData({
+      userName: '',
+      email: '',
+      password: ''
+    });
   })
   .catch(error => {
     // Handle network errors
@@ -63,9 +71,9 @@ const Register = () => {
       />
       <input
         type="password"
-        name="passwordHash"
+        name="password"
         placeholder="password"
-        value={formData.passwordHash}
+        value={formData.password}
         onChange={handleChange}
       />
       {/* Add more input fields as needed */}
